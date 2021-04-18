@@ -1,1 +1,69 @@
 
+-- 1) Querry: select all customers whose names begin with the letter "L"
+
+SELECT COUNT(name), name, custom_id 
+FROM customer 
+WHERE name LIKE('L%') ;
+--------------------------------------------------------------------------------
+
+-- 2) Querry: names of all international customers 
+SELECT 
+name as name,
+customer.email as email,
+countries.country_name
+FROM customer 
+INNER JOIN international_cust ON customer.custom_id=international_cust.custom_id
+INNER JOIN countries ON international_cust.country_id=countries.country_id
+--------------------------------------------------------------------------------
+
+-- 3) Querry: show all countries that use the shipping_hub of "CN"
+
+SELECT country_code as shipping_hub, country_name 
+FROM `countries` 
+WHERE country_code='CN' 
+--------------------------------------------------------------------------------
+
+-- 4) Querry: show the total amount of cart for the customer name: "Nada"
+SELECT
+cart.total_amount as Total_amount
+FROM customer
+JOIN orders ON customer.custom_id=orders.cust_id
+JOIN cart ON orders.cart_id=cart.cart_id
+WHERE customer.name='Nada'
+--------------------------------------------------------------------------------
+
+-- 5)  Querry: the catagory of the item purchased by the customer name "Nada"
+
+SELECT
+catagory_name as Total_amount
+FROM customer
+JOIN orders ON customer.custom_id=orders.cust_id
+JOIN cart ON orders.cart_id=cart.cart_id
+JOIN items ON cart.item_id=items.item_id
+JOIN catagory ON items.cat_id=catagory.cat_id
+WHERE customer.name='Nada'
+--------------------------------------------------------------------------------
+
+-- 6)  Querry: for order #5 , find the shipping date AND currier email
+SELECT
+currier_email as Email,
+shipping.shipping_date
+FROM currier
+JOIN shipping ON currier.currier_id=shipping.currier_id
+JOIN orders ON orders.order_id=shipping.order_id
+WHERE orders.order_id='5'
+--------------------------------------------------------------------------------
+
+-- 7)  Querry: for customer name: 'Harlen' give item number, price and name of producing company.
+SELECT
+prod_name as Producer,
+customer.name as 'Name of Customer',
+items.item_id as 'Item No.',
+items.item_price as 'Item Price'
+FROM customer
+JOIN orders ON customer.custom_id=orders.cust_id
+JOIN cart ON orders.cart_id=cart.cart_id
+JOIN items ON cart.item_id=items.item_id
+JOIN sortiment ON items.item_id=sortiment.item_id
+JOIN producers ON producers.prod_id=sortiment.prod_id
+WHERE customer.name='Harlen'
