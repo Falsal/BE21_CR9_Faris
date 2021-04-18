@@ -64,77 +64,61 @@ INSERT INTO `catagory` (`cat_id`, `catagory_name`) VALUES
 
 CREATE TABLE `countries` (
   `country_name` varchar(50) DEFAULT NULL,
-  `country_code` varchar(2) DEFAULT NULL
+  `country_code` varchar(2) DEFAULT NULL,
+  `country_id` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `countries` (`country_name`, `country_code`) VALUES
-('Spain', 'ES'),
-('Madagascar', 'MG'),
-('Dominican Republic', 'DO'),
-('France', 'FR'),
-('Philippines', 'PH'),
-('Portugal', 'PT'),
-('Indonesia', 'ID'),
-('France', 'FR'),
-('Madagascar', 'MG'),
-('Latvia', 'LV'),
-('Poland', 'PL'),
-('China', 'CN'),
-('China', 'CN'),
-('Indonesia', 'ID'),
-('Somalia', 'SO'),
-('Thailand', 'TH'),
-('China', 'CN'),
-('Malaysia', 'MY'),
-('China', 'CN'),
-('China', 'CN'),
-('Philippines', 'PH'),
-('Russia', 'RU'),
-('New Zealand', 'NZ'),
-('Cape Verde', 'CV'),
-('Poland', 'PL'),
-('North Korea', 'KP'),
-('Mongolia', 'MN'),
-('Indonesia', 'ID'),
-('Sweden', 'SE'),
-('Norway', 'NO'),
-('China', 'CN'),
-('Russia', 'RU'),
-('Czech Republic', 'CZ'),
-('United States', 'US'),
-('Indonesia', 'ID'),
-('China', 'CN'),
-('Venezuela', 'VE'),
-('Gambia', 'GM'),
-('Sierra Leone', 'SL'),
-('Iran', 'IR'),
-('South Korea', 'KR'),
-('Dominican Republic', 'DO'),
-('Finland', 'FI'),
-('Peru', 'PE'),
-('Venezuela', 'VE'),
-('Indonesia', 'ID'),
-('Ukraine', 'UA'),
-('Indonesia', 'ID'),
-('Brazil', 'BR'),
-('France', 'FR');
-
-CREATE TABLE `credit_card_companies` (
-  `credit_card_id` int(11) NOT NULL,
-  `credit_card_name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `credit_card_companies` (`credit_card_id`, `credit_card_name`) VALUES
-(1, 'jcb'),
-(2, 'mastercard'),
-(3, 'maestro'),
-(4, 'jcb'),
-(5, 'diners-club-carte-blanche'),
-(6, 'mastercard'),
-(7, 'jcb'),
-(8, 'jcb'),
-(9, 'laser'),
-(10, 'jcb');
+INSERT INTO `countries` (`country_name`, `country_code`, `country_id`) VALUES
+('Spain', 'ES', 1),
+('Madagascar', 'MG', 2),
+('South Africa', 'DO', 3),
+('France', 'FR', 4),
+('Philippines', 'PH', 5),
+('Portugal', 'PT', 6),
+('Iraq', 'ID', 7),
+('France', 'FR', 8),
+('Madagascar', 'MG', 9),
+('Latvia', 'LV', 10),
+('Poland', 'PL', 11),
+('Myanmar', 'CN', 12),
+('Burma', 'CN', 13),
+('Oman', 'ID', 14),
+('Somalia', 'SO', 15),
+('Thailand', 'TH', 16),
+('Congo', 'CN', 17),
+('Malaysia', 'MY', 18),
+('Laos', 'CN', 19),
+('Korea', 'CN', 20),
+('Philippines', 'PH', 21),
+('Russia', 'RU', 22),
+('New Zealand', 'NZ', 23),
+('Cape Verde', 'CV', 24),
+('Poland', 'PL', 25),
+('North Korea', 'KP', 26),
+('Mongolia', 'MN', 27),
+('Portugal', 'ID', 28),
+('Sweden', 'SE', 29),
+('Norway', 'NO', 30),
+('China', 'CN', 31),
+('Russia', 'RU', 32),
+('Czech Republic', 'CZ', 33),
+('United States', 'US', 34),
+('Indonesia', 'ID', 35),
+('Vietnam', 'CN', 36),
+('Venezuela', 'VE', 37),
+('Gambia', 'GM', 38),
+('Sierra Leone', 'SL', 39),
+('Iran', 'IR', 40),
+('South Korea', 'KR', 41),
+('Dominican Republic', 'DO', 42),
+('Finland', 'FI', 43),
+('Peru', 'PE', 44),
+('Venezuela', 'VE', 45),
+('Kuwait', 'ID', 46),
+('Ukraine', 'UA', 47),
+('Indonesia', 'ID', 48),
+('Brazil', 'BR', 49),
+('French Polynesia', 'FR', 50);
 
 CREATE TABLE `currier` (
   `currier_id` int(11) NOT NULL,
@@ -175,14 +159,14 @@ INSERT INTO `customer` (`custom_id`, `name`, `streetname`, `email`, `card_no`) V
 
 CREATE TABLE `international_cust` (
   `custom_id` int(11) NOT NULL,
-  `country_code` varchar(50) DEFAULT NULL
+  `country_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `international_cust` (`custom_id`, `country_code`) VALUES
-(1, 'TH'),
-(3, 'CN'),
-(7, 'PT'),
-(9, 'NG');
+INSERT INTO `international_cust` (`custom_id`, `country_id`) VALUES
+(9, 2),
+(7, 9),
+(1, 13),
+(3, 22);
 
 CREATE TABLE `items` (
   `cat_id` int(11) DEFAULT NULL,
@@ -221,23 +205,23 @@ INSERT INTO `orders` (`cart_id`, `cust_id`, `order_id`) VALUES
 (10, 10, 10);
 
 CREATE TABLE `shipping` (
-  `currier_id` int(11) DEFAULT NULL,
-  `order_id` int(11) DEFAULT NULL,
+  `currier_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `shipping_id` int(11) NOT NULL,
   `shipping_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `shipping` (`currier_id`, `order_id`, `shipping_id`, `shipping_date`) VALUES
-(1, 1, 1, '0000-00-00'),
-(2, 2, 2, '0000-00-00'),
-(3, 3, 3, '0000-00-00'),
-(4, 4, 4, '0000-00-00'),
-(5, 5, 5, '0000-00-00'),
-(6, 6, 6, '0000-00-00'),
-(7, 7, 7, '0000-00-00'),
-(8, 8, 8, '0000-00-00'),
-(9, 9, 9, '0000-00-00'),
-(10, 10, 10, '0000-00-00');
+(1, 1, 1, '2021-09-13'),
+(2, 2, 2, '2021-04-22'),
+(3, 3, 3, '2021-04-24'),
+(4, 4, 4, '2021-04-29'),
+(5, 5, 5, '2021-05-12'),
+(6, 6, 6, '2021-04-30'),
+(7, 7, 7, '2021-05-13'),
+(8, 8, 8, '2021-06-10'),
+(9, 9, 9, '2021-07-13'),
+(10, 10, 10, '2021-08-19');
 
 
 ALTER TABLE `banks`
@@ -250,8 +234,8 @@ ALTER TABLE `cart`
 ALTER TABLE `catagory`
   ADD PRIMARY KEY (`cat_id`);
 
-ALTER TABLE `credit_card_companies`
-  ADD PRIMARY KEY (`credit_card_id`);
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`country_id`);
 
 ALTER TABLE `currier`
   ADD PRIMARY KEY (`currier_id`);
@@ -260,7 +244,8 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`custom_id`);
 
 ALTER TABLE `international_cust`
-  ADD PRIMARY KEY (`custom_id`);
+  ADD PRIMARY KEY (`custom_id`),
+  ADD KEY `fk_country_id` (`country_id`);
 
 ALTER TABLE `items`
   ADD PRIMARY KEY (`item_id`),
@@ -268,11 +253,13 @@ ALTER TABLE `items`
 
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `fk_cart_id` (`cart_id`),
-  ADD KEY `fk_cust_id` (`cust_id`);
+  ADD KEY `fk_cust_id` (`cust_id`),
+  ADD KEY `cart_id` (`cart_id`);
 
 ALTER TABLE `shipping`
-  ADD PRIMARY KEY (`shipping_id`);
+  ADD PRIMARY KEY (`shipping_id`),
+  ADD UNIQUE KEY `currier_id` (`currier_id`,`order_id`),
+  ADD KEY `order_id` (`order_id`);
 
 
 ALTER TABLE `cart`
@@ -280,6 +267,9 @@ ALTER TABLE `cart`
 
 ALTER TABLE `catagory`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+ALTER TABLE `countries`
+  MODIFY `country_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 ALTER TABLE `customer`
   MODIFY `custom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
@@ -292,13 +282,19 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `fk_item_id` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
 
 ALTER TABLE `international_cust`
-  ADD CONSTRAINT `custom_id` FOREIGN KEY (`custom_id`) REFERENCES `customer` (`custom_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`country_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `international_cust_ibfk_1` FOREIGN KEY (`custom_id`) REFERENCES `customer` (`custom_id`) ON UPDATE CASCADE;
 
 ALTER TABLE `items`
   ADD CONSTRAINT `fk_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `catagory` (`cat_id`) ON UPDATE CASCADE;
 
 ALTER TABLE `orders`
-  ADD CONSTRAINT `fk_cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`custom_id`);
+  ADD CONSTRAINT `fk_cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`custom_id`),
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON UPDATE CASCADE;
+
+ALTER TABLE `shipping`
+  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`currier_id`) REFERENCES `currier` (`currier_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
